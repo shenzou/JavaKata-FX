@@ -98,7 +98,7 @@ public class Inventory {
         }
     }
 
-    Item[] getItems() {
+  public  Item[] getItems() {
         return items;
     }
 }
