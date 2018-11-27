@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #Project by Salles Mathieu, Rekibi Faycal, Shenouda Alexandre
 
 # GildedRoseJavaKata
@@ -51,3 +52,9 @@ you). Your work needs to be completed by Friday, February 18, 2011
 Just for clarification, an item can never have its Quality increase
 above 50, however "Sulfuras" is a legendary item and as such its
 Quality is 80 and it never alters.
+=======
+Java FX project: GildedRoseKata
+
+Group: Mathieu Salles, Fayçal Amine, Alexandre Shenouda
+
+>>>>>>> 9568e5c3a163c2fbebc664437bc9d2a0ee3b95e9
