@@ -36,33 +36,22 @@ public class ControllerInventory implements Initializable {
 	@FXML
 	Label labelError;
 
-	private Inventory inventory;
+	private Inventory inventory= new  Inventory();
 	String storeName;
 	int jour; 
 	private Item[] items;
+	List<String> descriptif = new ArrayList<String>();
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		
-		//inventory.getItems(); 
-		items = new Item[]{
-		new Dexterity_vest("+5 Dexterity Vest", 10, 20),
-        new Aged_Brie("Aged Brie", 2, 0),
-        new Elixir("Elixir of the Mongoose", 5, 7),
-        new Sulfuras("Sulfuras, Hand of Ragnaros", 0, 80),
-        new Backstage("Backstage passes to a TAFKAL80ETC concert", 15, 20),
-        new Conjured_mana("Conjured Mana Cake", 3, 6)};
-		// TODO Auto-generated method stub
-		//labelError.setText("Pour la modification ou l'ajout entrez une date");
 		System.out.print("initiatlisation du controller");
-		  inventory = new  Inventory(items);
+		   
+		System.out.print(" init "+inventory.getItems().length);
 		
 		
-		
-		List<String> descriptif = new ArrayList<String>();
-		for(int i =0;i<items.length;i++) {
-			descriptif.add(items[i].getName()+ " Q:"+items[i].getQuality()+ " S:"+items[i].getSellIn());
+		for(int i =0;i<inventory.getItems().length;i++) {
+			descriptif.add(inventory.getItems()[i].getName()+ " Q:"+inventory.getItems()[i].getQuality()+ " S:"+inventory.getItems()[i].getSellIn());
 		}
 		
 		ObservableList<String> collection=FXCollections.observableArrayList(descriptif);
@@ -74,29 +63,19 @@ public class ControllerInventory implements Initializable {
 	@FXML
 	private void ListenerButton() {	
 
-		System.out.print(" listener "+items.length);
-		inventory.updateQuality();
-		for(int i =0;i<items.length;i++) {
-			/*
-			inventory.getItems()[i].setName(items[i].getName());
-			inventory.getItems()[i].setQuality(items[i].getQuality());
-			inventory.getItems()[i].setSellIn(items[i].getSellIn());
-			*/
-			
+		System.out.print("\n listener "+inventory.getItems().length);
+		inventory.updateQuality();		
+		System.out.print("\n Jour suivant "+inventory.getItems()[0].getQuality());
+		
+		descriptif.removeAll(descriptif);
+		System.out.print("\n descriptif"+descriptif.size());
+		for(int i =0;i<inventory.getItems().length;i++) {
+			descriptif.add(inventory.getItems()[i].getName()+ " Q:"+inventory.getItems()[i].getQuality()+ " S:"+inventory.getItems()[i].getSellIn());
 		}
-		
-		/*
-		List<String> descriptif = new ArrayList<String>();
-		
 		ObservableList<String>  collection=FXCollections.observableArrayList(descriptif);
-		collection.removeAll(descriptif);
-		for(int i =0;i<items.length;i++) {
-			descriptif.add(items[i].getName()+ " Q:"+items[i].getQuality()+ " S:"+items[i].getSellIn());
-		}
-		collection=FXCollections.observableArrayList(descriptif);
 		TableController.setItems(collection);
 		
-		*/
+		
 		
 	}
 	@FXML
