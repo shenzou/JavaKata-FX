@@ -9,6 +9,12 @@ public class Elixir extends Item {
 
     public void updateQuality()
     {
+        if(getQuality() > 0){
 
+            setQuality(getQuality()-1);
+            if (getSellIn() == 0 && getQuality() > 0){
+                setQuality(getQuality()- 1);
+            }
+        }
     }
 }

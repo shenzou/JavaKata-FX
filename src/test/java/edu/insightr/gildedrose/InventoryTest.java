@@ -1,6 +1,6 @@
 package edu.insightr.gildedrose;
 
-import jdk.internal.jline.internal.TestAccessible;
+//import jdk.internal.jline.internal.TestAccessible;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

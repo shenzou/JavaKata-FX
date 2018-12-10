@@ -16,6 +16,10 @@ public class Conjured_mana extends Item {
             {
                 setQuality(getQuality() - 2);
             }
+            if(getQuality()==1)
+            {
+                setQuality(0);
+            }
         }
     }
 }

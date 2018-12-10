@@ -25,5 +25,9 @@ public class Backstage extends Item {
                 }
             }
         }
+        if(getSellIn()<=0)
+        {
+            setQuality(0);
+        }
     }
 }
