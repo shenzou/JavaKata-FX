@@ -1,13 +1,10 @@
 package application;
-import java.io.File;
 import java.net.URL;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.swing.table.TableColumn;
-
 import edu.insightr.gildedrose.Aged_Brie;
 import edu.insightr.gildedrose.Backstage;
 import edu.insightr.gildedrose.Conjured_mana;
@@ -46,7 +43,7 @@ public class ControllerInventory implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
+	
 		items = new Item[]{
 		new Dexterity_vest("+5 Dexterity Vest", 10, 20),
         new Aged_Brie("Aged Brie", 2, 0),
@@ -58,6 +55,7 @@ public class ControllerInventory implements Initializable {
 		//labelError.setText("Pour la modification ou l'ajout entrez une date");
 		System.out.print("initiatlisation du controller");
 		
+		
 		List<String> descriptif = new ArrayList<String>();
 		for(int i =0;i<items.length;i++) {
 			descriptif.add(items[i].getName()+ " Q:"+items[i].getQuality()+ " S:"+items[i].getSellIn());
@@ -65,6 +63,7 @@ public class ControllerInventory implements Initializable {
 		
 		ObservableList<String> collection=FXCollections.observableArrayList(descriptif);
 		TableController.setItems(collection);
+		
 	}
 	
 	
@@ -77,6 +76,7 @@ public class ControllerInventory implements Initializable {
 		
 		ObservableList<String> collection=FXCollections.observableArrayList(descriptif);
 		TableController.setItems(collection);
+		System.out.print("Listener");
 		
 	}
 	@FXML
