@@ -16,6 +16,7 @@ import edu.insightr.gildedrose.Elixir;
 import edu.insightr.gildedrose.Inventory;
 import edu.insightr.gildedrose.Item;
 import edu.insightr.gildedrose.Sulfuras;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -26,7 +27,7 @@ import javafx.scene.control.ListView;
 public class ControllerInventory implements Initializable {
 
 	@FXML
-	ListView <Item> TableController;
+	ListView <String> TableController;
 	@FXML
 	TableColumn QualityColumn;
 	@FXML
@@ -55,29 +56,38 @@ public class ControllerInventory implements Initializable {
         new Conjured_mana("Conjured Mana Cake", 3, 6)};
 		// TODO Auto-generated method stub
 		//labelError.setText("Pour la modification ou l'ajout entrez une date");
-		System.out.print("initiatlisation du controllerSs");
+		System.out.print("initiatlisation du controller");
 		
+		List<String> descriptif = new ArrayList<String>();
+		for(int i =0;i<items.length;i++) {
+			descriptif.add(items[i].getName()+ " Q:"+items[i].getQuality()+ " S:"+items[i].getSellIn());
+		}
+		
+		ObservableList<String> collection=FXCollections.observableArrayList(descriptif);
+		TableController.setItems(collection);
 	}
 	
-	/*
+	
 	@FXML
 	private void ListenerButton() {	
-		inventory.updateQuality();
+		List<String> descriptif = new ArrayList<String>();
+		for(int i =0;i<items.length;i++) {
+			descriptif.add(items[i].getName()+ " Q:"+items[i].getQuality()+ " S:"+items[i].getSellIn());
+		}
+		
+		ObservableList<String> collection=FXCollections.observableArrayList(descriptif);
+		TableController.setItems(collection);
 		
 	}
 	@FXML
 	private void ListenerList() {		
-		//int index= TableController.getSelectionModel().getSelectedIndex();
-		//Item[] items =inventory.getItems();		
-		//List<Item> listitem=Arrays.asList(items);
-		//TableController.setItems((ObservableList<Item>) listitem);
-		//table_controller.getColumns().add(name_controller);
-		//table_controller.add
-		//table_controller.setItems();
-		//System.out.println(b.get(index));	
-		//name_controller;
-		//sellin_controller;
-		//quality_controller;
+		int index= TableController.getSelectionModel().getSelectedIndex();
+		Item[] items =inventory.getItems();		
+		List<Item> listitem=Arrays.asList(items);
+		System.out.println("Listener list ");
+		
+		
+		
 	}
-	*/
+	
 }
