@@ -43,7 +43,9 @@ public class ControllerInventory implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-	
+		
+		
+		//inventory.getItems(); 
 		items = new Item[]{
 		new Dexterity_vest("+5 Dexterity Vest", 10, 20),
         new Aged_Brie("Aged Brie", 2, 0),
@@ -54,6 +56,8 @@ public class ControllerInventory implements Initializable {
 		// TODO Auto-generated method stub
 		//labelError.setText("Pour la modification ou l'ajout entrez une date");
 		System.out.print("initiatlisation du controller");
+		  inventory = new  Inventory(items);
+		
 		
 		
 		List<String> descriptif = new ArrayList<String>();
@@ -69,21 +73,39 @@ public class ControllerInventory implements Initializable {
 	
 	@FXML
 	private void ListenerButton() {	
+
+		System.out.print(" listener "+items.length);
+		inventory.updateQuality();
+		for(int i =0;i<items.length;i++) {
+			/*
+			inventory.getItems()[i].setName(items[i].getName());
+			inventory.getItems()[i].setQuality(items[i].getQuality());
+			inventory.getItems()[i].setSellIn(items[i].getSellIn());
+			*/
+			
+		}
+		
+		/*
 		List<String> descriptif = new ArrayList<String>();
+		
+		ObservableList<String>  collection=FXCollections.observableArrayList(descriptif);
+		collection.removeAll(descriptif);
 		for(int i =0;i<items.length;i++) {
 			descriptif.add(items[i].getName()+ " Q:"+items[i].getQuality()+ " S:"+items[i].getSellIn());
 		}
-		
-		ObservableList<String> collection=FXCollections.observableArrayList(descriptif);
+		collection=FXCollections.observableArrayList(descriptif);
 		TableController.setItems(collection);
-		System.out.print("Listener");
+		
+		*/
 		
 	}
 	@FXML
 	private void ListenerList() {		
+		/*
 		int index= TableController.getSelectionModel().getSelectedIndex();
 		Item[] items =inventory.getItems();		
 		List<Item> listitem=Arrays.asList(items);
+		*/
 		System.out.println("Listener list ");
 		
 		
