@@ -103,16 +103,11 @@ public class ControllerInventory implements Initializable {
 	String json2 = "[{\"name\":\"aged 1\", \"sellIn\":2, \"quality\":0 },{ \"name\":\"aged 2\", \"sellIn\":3, \"quality\":0},{\"name\":\"aged 3\",\"sellIn\":4,\"quality\":0 }]";	
 	String jsonF="[{\"name\":\"aged 1\", \"sellIn\":2, \"quality\":0 },{\"name\":\"aged 2\", \"sellIn\":3, \"quality\":0},{\"name\":\"aged 3\", \"sellIn\":4, \"quality\":0 },{ \"name\":\"backstage passe to A concert\", \"sellIn\":15, \"quality\":20 },{ \"name\":\"backstage passe to B concert\", \"sellIn\":16, \"quality\":21},{ \"name\":\"backstage passe to C concert\", \"sellIn\":17, \"quality\":22 },{ \"name\":\"conjured mana 1\", \"sellIn\":3, \"quality\":6 },{\"name\":\"conjured mana 2\", \"sellIn\":4, \"quality\":7},{ \"name\":\"conjured mana 3\", \"sellIn\":5, \"quality\":8 },{ \"name\":\"+1 dexterity vest\", \"sellIn\":10, \"quality\":20 },		  {\"name\":\"+2 dexterity vest\", \"sellIn\":11, \"quality\":21},{\"name\":\"+3 dexterity vest\", \"sellIn\":12, \"quality\":22 },{ \"name\":\"Elixir A\", \"sellIn\":5, \"quality\":7 },{ \"name\":\"Elixir B\", \"sellIn\":6, \"quality\":8},{\"name\":\"Elixir C\",  \"sellIn\":7, \"quality\":9 },{ \"name\":\"Sukfuras A\", \"sellIn\":0, \"quality\":80},{ \"name\":\"Sukfuras B\", \"sellIn\":0, \"quality\":81},{\"name\":\"Sukfuras C\", \"sellIn\":0, \"quality\":82}]";
 	 List<Item> inv=new ArrayList<Item>();
-	
+	 List<Item> itemf=new ArrayList<Item>();
 	ObjectMapper objectMapper = new ObjectMapper();	
 	JsonNode jsonNode;
 	
-	try {
-		/*jsonNode = objectMapper.readTree(json1);
-		String color = jsonNode.get("name").asText(); 
-		 System.out.println(color);
-		 */
-		
+	try {	
 		 
 		  ObjectMapper mapper = new ObjectMapper();
 	      mapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -121,18 +116,56 @@ public class ControllerInventory implements Initializable {
 	      
 	      for(int i =0;i<inv.size();i++) {
 	    	  
-	    	  System.out.println(" item "+inv.get(i));	 
-	    	  //System.out.println( inv.get(i).getName());
-	    	  //System.out.println("name "+inv.get(i).getQuality());
-	    	 // String s=inv.get(i).toString();
-	    	 /* jsonNode = objectMapper.readTree(s);
-	    	  String name = jsonNode.get("name").asText(); 
-	    	  System.out.println(" n info  "+name);
-	    	  String sell = jsonNode.get("sellIn").asText(); 
-	    	  System.out.println(" s info  "+sell);
-	    	  String quality = jsonNode.get("quality").asText(); 
-	    	  System.out.println(" q info  "+quality);
-	    	  */
+	    	  System.out.println(" item "+inv.get(i));
+	    	  String s= String.valueOf(inv.get(i));
+	    	  System.out.println(" info  "+s);
+	    	  String name="name=";
+	    	 String sell=", sellIn=";
+	    	String quality=", quality=";
+	    	  System.out.println(" info  "+ s.indexOf(name));
+	    	  String iname=s.substring(s.indexOf(name)+name.length(),s.indexOf(sell));
+	    	  System.out.println(" name  "+ s.substring(s.indexOf(name)+name.length(),s.indexOf(sell)));
+	    	  String isell= s.substring(s.indexOf(sell)+sell.length(),s.indexOf(quality));
+	    	  System.out.println(" sell  "+ s.substring(s.indexOf(sell)+sell.length(),s.indexOf(quality)));
+	    	 String iqual=s.substring(s.indexOf(quality)+quality.length(),s.length()-1);
+	    	  System.out.println(" qual  "+ s.substring(s.indexOf(quality)+quality.length(),s.length()-1));
+		    	 
+	    	
+	    	 
+	    	  CharSequence cs1 = "aged";
+	    	  CharSequence cs2="backstage";
+	    	  CharSequence cs3="dexterity vest";
+	    	  CharSequence cs4="Elixir";
+	    	  CharSequence cs5="Sukfuras";
+	    	  CharSequence cs6="conjured";
+	    	  if(iname.contains(cs1)) {
+	    		  Aged_Brie a=  new Aged_Brie(iname, Integer.parseInt(isell),Integer.parseInt(iqual));
+	    		  itemf.add(a);
+	    	  }
+	    	  
+	    	  if(iname.contains(cs2)) {
+	    		  Backstage a=  new Backstage(iname, Integer.parseInt(isell),Integer.parseInt(iqual));
+	    		  itemf.add(a);
+	    	  }
+	    	  
+	    	  if(iname.contains(cs3)) {
+	    		  Dexterity_vest a=  new Dexterity_vest(iname, Integer.parseInt(isell),Integer.parseInt(iqual));
+	    	  }
+	    	  
+	    	  if(iname.contains(cs4)) {
+	    		  Elixir a=  new Elixir(iname, Integer.parseInt(isell),Integer.parseInt(iqual));
+	    		  itemf.add(a);
+	    	  }
+	    	  
+	    	  if(iname.contains(cs5)) {
+	    		  Sulfuras a=  new Sulfuras(iname, Integer.parseInt(isell),Integer.parseInt(iqual));
+	    		  itemf.add(a);
+	    	  }
+	    	  
+	    	  if(iname.contains(cs6)) {
+	    		  Conjured_mana a=  new Conjured_mana(iname, Integer.parseInt(isell),Integer.parseInt(iqual));
+	    		  itemf.add(a);
+	    	  }
 	      }
 	      
 		 
@@ -141,7 +174,7 @@ public class ControllerInventory implements Initializable {
 		e.printStackTrace();
 	}
 	
-		return inv;
+		return itemf;
 	}
 	
 }
