@@ -13,6 +13,9 @@ public abstract class Item implements Update{
         this.sellIn = sellIn;
         this.quality = quality;
     }
+    public Item() {
+        super();
+    }
 
     public String getName() {
         return name;
