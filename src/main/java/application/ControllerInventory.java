@@ -20,6 +20,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.chart.*;
+import javafx.scene.Group;
 
 public class ControllerInventory implements Initializable {
 
@@ -35,6 +42,8 @@ public class ControllerInventory implements Initializable {
 	Button UpdateButton;
 	@FXML
 	Label labelError;
+	@FXML
+	PieChart pieChart;
 
 	private Inventory inventory= new  Inventory();
 	String storeName;
@@ -48,14 +57,59 @@ public class ControllerInventory implements Initializable {
 		System.out.print("initiatlisation du controller");
 		   
 		System.out.print(" init "+inventory.getItems().length);
-		
+
+		int totalBrie =0;
+		int totalBackstage=0;
+		int totalConjured=0;
+		int totalDexterity =0 ;
+		int totalElixir = 0;
+		int totalSulfuras =0;
 		
 		for(int i =0;i<inventory.getItems().length;i++) {
 			descriptif.add(inventory.getItems()[i].getName()+ " Q:"+inventory.getItems()[i].getQuality()+ " S:"+inventory.getItems()[i].getSellIn());
+			
+			if(inventory.getItems()[i] instanceof Aged_Brie )
+			{
+				totalBrie++;
+			}
+			if(inventory.getItems()[i] instanceof Backstage )
+			{
+				totalBackstage++;
+			}
+			if(inventory.getItems()[i] instanceof Conjured_mana )
+			{
+				totalConjured++;
+			}
+			if(inventory.getItems()[i] instanceof Dexterity_vest )
+			{
+				totalDexterity++;
+			}
+			if(inventory.getItems()[i] instanceof Elixir )
+			{
+				totalElixir++;
+			}
+			if(inventory.getItems()[i] instanceof Sulfuras )
+			{
+				totalSulfuras++;
+			}
 		}
-		
+
+		ObservableList<PieChart.Data> pieChartData =
+				FXCollections.observableArrayList(
+						new PieChart.Data("Aged_Brie", totalBrie),
+						new PieChart.Data("Backstage", totalBackstage),
+						new PieChart.Data("Conjured_Mana", totalConjured),
+						new PieChart.Data("Dexterity_Vest", totalDexterity),
+						new PieChart.Data("Elixir", totalElixir));
+						new PieChart.Data("Sulfuras", totalSulfuras);
+		final PieChart chart = new PieChart(pieChartData);
+		pieChart.setTitle("Stock");
+
+		pieChart.setData(pieChartData);
+
 		ObservableList<String> collection=FXCollections.observableArrayList(descriptif);
 		TableController.setItems(collection);
+		
 		
 	}
 	
