@@ -1,0 +1,28 @@
+{
+"Items":[
+ 
+  {"type":"Aged_Brie", "name":"aged 1", "sellIn":2, "quality":0 },
+  {"type":"Aged_Brie", "name":"aged 2", "sellIn":3, "quality":0},
+  {"type":"Aged_Brie", "name":"aged 3", "sellIn":4, "quality":0 },
+
+  { "type":"Backstage","name":"backstage passe to A concert", "sellIn":15, "quality":20 },
+  { "type":"Backstage","name":"backstage passe to B concert", "sellIn":16, "quality":21},
+  { "type":"Backstage","name":"backstage passe to C concert", "sellIn":17, "quality":22 },
+
+  {"type":"Conjured_mana", "name":"conjured mana 1", "sellIn":3, "quality":6 },
+  {"type":"Conjured_mana", "name":"conjured mana 2", "sellIn":4, "quality":7},
+  {"type":"Conjured_mana", "name":"conjured mana 3", "sellIn":5, "quality":8 },
+  
+  {"type":"Dexterity_vest", "name":"+1 dexterity vest", "sellIn":10, "quality":20 },
+  {"type":"Dexterity_vest", "name":"+2 dexterity vest", "sellIn":11, "quality":21},
+  {"type":"Dexterity_vest", "name":"+3 dexterity vest", "sellIn":12, "quality":22 },
+
+  {"type":"Elixir", "name":"Elixir A", "sellIn":5, "quality":7 },
+  {"type":"Elixir", "name":"Elixir B", "sellIn":6, "quality":8},
+  {"type":"Elixir","name":"Elixir C",  "sellIn":7, "quality":9 },
+
+  {"type":"Elixir", "name":"Sukfuras A", "sellIn":0, "quality":80},
+  {"type":"Elixir", "name":"Sukfuras B", "sellIn":0, "quality":81},
+  {"type":"Elixir", "name":"Sukfuras C", "sellIn":0, "quality":82}
+]
+}
