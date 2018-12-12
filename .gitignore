@@ -3,13 +3,12 @@
 *.iws
 *.iml
 .idea
+.settings
 target
 .svn
 APDescription.txt
 MTPs-*.*
 release.properties
 .DS_Store
-.classpath
-.project
-.idea
-.settings
+*.classpath
+*.project
