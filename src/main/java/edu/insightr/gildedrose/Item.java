@@ -1,5 +1,7 @@
 package edu.insightr.gildedrose;
 
+import java.util.Date;
+
 public abstract class Item implements Update{
 
     private String name;

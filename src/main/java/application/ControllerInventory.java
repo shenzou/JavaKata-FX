@@ -1,8 +1,11 @@
 package application;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -16,6 +19,7 @@ import java.util.Scanner;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.TableColumn;
+import javax.swing.text.DateFormatter;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -69,6 +73,10 @@ public class ControllerInventory implements Initializable {
 	Button buy;
 	@FXML
 	Button sell;
+	@FXML
+	Label credit;
+	@FXML
+	ListView<String> history;
 
 	private Inventory inventory= new  Inventory();
 	private Inventory invPNJ = new Inventory();
@@ -78,10 +86,13 @@ public class ControllerInventory implements Initializable {
 	List<String> descriptif = new ArrayList<String>();
 	List<String> descriptifPNJ = new ArrayList<String>();
 	private List<Item> historique = new ArrayList<Item>();
+	int intCredit;
+	List<String> lHistory = new ArrayList<String>();
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
+		intCredit=0;
 		updateList();
 
 
@@ -90,6 +101,7 @@ public class ControllerInventory implements Initializable {
 	
 	private void updateList()
 	{
+		descriptif = new ArrayList<String>();
 		System.out.print("initiatlisation du controller");
 		   
 		System.out.print(" init "+inventory.getItems().length);
@@ -136,8 +148,8 @@ public class ControllerInventory implements Initializable {
 						new PieChart.Data("Backstage", totalBackstage),
 						new PieChart.Data("Conjured_Mana", totalConjured),
 						new PieChart.Data("Dexterity_Vest", totalDexterity),
-						new PieChart.Data("Elixir", totalElixir));
-						new PieChart.Data("Sulfuras", totalSulfuras);
+						new PieChart.Data("Elixir", totalElixir),
+						new PieChart.Data("Sulfuras", totalSulfuras));
 		final PieChart chart = new PieChart(pieChartData);
 		pieChart.setTitle("Stock");
 
@@ -149,45 +161,14 @@ public class ControllerInventory implements Initializable {
 
 	private void refreshItems()
 	{
-		
+		descriptifPNJ = new ArrayList<String>();
 		System.out.print("initiatlisation du controller");
 		   
 		System.out.print(" init "+invPNJ.getItems().length);
-
-		int totalBrie =0;
-		int totalBackstage=0;
-		int totalConjured=0;
-		int totalDexterity =0 ;
-		int totalElixir = 0;
-		int totalSulfuras =0;
 		
 		for(int i =0;i<invPNJ.getItems().length;i++) {
 			descriptifPNJ.add(invPNJ.getItems()[i].getName()+ "\nQuality:"+invPNJ.getItems()[i].getQuality()+ "\nSell:"+invPNJ.getItems()[i].getSellIn());
 
-			if(invPNJ.getItems()[i] instanceof Aged_Brie )
-			{
-				totalBrie++;
-			}
-			if(invPNJ.getItems()[i] instanceof Backstage )
-			{
-				totalBackstage++;
-			}
-			if(invPNJ.getItems()[i] instanceof Conjured_mana )
-			{
-				totalConjured++;
-			}
-			if(invPNJ.getItems()[i] instanceof Dexterity_vest )
-			{
-				totalDexterity++;
-			}
-			if(invPNJ.getItems()[i] instanceof Elixir )
-			{
-				totalElixir++;
-			}
-			if(invPNJ.getItems()[i] instanceof Sulfuras )
-			{
-				totalSulfuras++;
-			}
 		}
 
 		
@@ -240,30 +221,60 @@ public class ControllerInventory implements Initializable {
 	@FXML
 	private void ListenerBuy()
 	{
+		Date now = new Date();
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
 		int index = TableController1.getSelectionModel().getSelectedIndex();
-		System.out.println(index);
+		
 		if(index!=-1)
 		{
-			inventory.addItem(invPNJ.getItems()[index]);
-			invPNJ.removeItem(index);
+			if(invPNJ.getItems()[index].getSellIn()<=intCredit)
+			{
+				lHistory.add("Bought: "+invPNJ.getItems()[index].getName()+", "+invPNJ.getItems()[index].getSellIn()+", Date: "+dateFormatter.format(now));
+				intCredit -= invPNJ.getItems()[index].getSellIn();
+				inventory.addItem(invPNJ.getItems()[index]);
+				invPNJ.removeItem(index);
+			}
 		}
 		updateList();
 		refreshItems();
+		credit.setText(intCredit + "€");
+		ObservableList<String> collection = FXCollections.observableArrayList(lHistory);
+		history.setItems(collection);
+		try {
+			historyFile();
+		}
+		catch(Exception e){
+			
+		}
+		
 	}
 	
 	@FXML
 	private void ListenerSell()
 	{
+		Date now = new Date();
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
 		int index = TableController.getSelectionModel().getSelectedIndex();
-		System.out.println(index);
+		
 		if(index!=-1)
-		{
-			invPNJ.addItem(inventory.getItems()[index]);
-			inventory.removeItem(index);
+		{	
+				lHistory.add("Sold: "+inventory.getItems()[index].getName()+", "+inventory.getItems()[index].getSellIn()+", Date: "+dateFormatter.format(now));
+				intCredit += inventory.getItems()[index].getSellIn();
+				invPNJ.addItem(inventory.getItems()[index]);
+				inventory.removeItem(index);
+				
 		}
 		updateList();
 		refreshItems();
-		
+		credit.setText(intCredit + "€");
+		ObservableList<String> collection = FXCollections.observableArrayList(lHistory);
+		history.setItems(collection);
+		try {
+			historyFile();
+		}
+		catch(Exception e){
+			
+		}
 	}
 	
 	private String Navigateur() {
@@ -322,6 +333,16 @@ public class ControllerInventory implements Initializable {
 		System.out.println("Listener list ");
 		
 		
+	}
+	
+	private void historyFile()
+	throws IOException {
+		BufferedWriter writer = new BufferedWriter(new FileWriter("Historique.txt"));
+	    for(String str : lHistory)
+	    {
+	    	writer.write(str+"\n");
+	    }
+	    writer.close();
 	}
 	
 	private List<Item> LecteurjsonPNJ(String jsonFile) {

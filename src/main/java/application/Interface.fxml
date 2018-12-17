@@ -1,18 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="889.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerInventory">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerInventory">
    <children>
       <ListView fx:id="TableController" layoutX="19.0" layoutY="69.0" prefHeight="200.0" prefWidth="339.0" />
-      <Button fx:id="UpdateButton" layoutX="367.0" layoutY="293.0" mnemonicParsing="false" onAction="#ListenerButton" text="Jour suivant" />
-      <Button fx:id="readJSON" layoutX="136.0" layoutY="557.0" mnemonicParsing="false" onAction="#ListenerJSON" text="Read a JSON File" />
-      <Button fx:id="buy" layoutX="116.0" layoutY="293.0" mnemonicParsing="false" onAction="#ListenerBuy" text="Buy" />
-      <Button fx:id="sell" layoutX="222.0" layoutY="293.0" mnemonicParsing="false" onAction="#ListenerSell" text="Sell" />
-      <PieChart fx:id="pieChart" layoutX="465.0" layoutY="57.0" title="piechart" />
-      <ListView fx:id="TableController1" layoutX="19.0" layoutY="350.0" prefHeight="200.0" prefWidth="339.0" />
+      <Button fx:id="UpdateButton" layoutX="278.0" layoutY="290.0" mnemonicParsing="false" onAction="#ListenerButton" text="Jour suivant" />
+      <Button fx:id="readJSON" layoutX="135.0" layoutY="534.0" mnemonicParsing="false" onAction="#ListenerJSON" text="Read a JSON File" />
+      <Button fx:id="buy" layoutX="357.0" layoutY="422.0" mnemonicParsing="false" onAction="#ListenerBuy" text="Buy" />
+      <Button fx:id="sell" layoutX="358.0" layoutY="157.0" mnemonicParsing="false" onAction="#ListenerSell" text="Sell" />
+      <PieChart fx:id="pieChart" layoutX="428.0" layoutY="57.0" title="piechart" />
+      <ListView fx:id="TableController1" layoutX="19.0" layoutY="334.0" prefHeight="200.0" prefWidth="339.0" />
+      <Label layoutX="19.0" layoutY="37.0" text="Local list">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="23.0" layoutY="303.0" text="Reseller">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="255.0" layoutY="44.0" text="Credit:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="credit" layoutX="311.0" layoutY="44.0" prefHeight="25.0" prefWidth="46.0" text="0€">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ListView fx:id="history" layoutX="494.0" layoutY="500.0" prefHeight="200.0" prefWidth="672.0" />
+      <BarChart layoutX="928.0" layoutY="69.0" title="Histogram">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BarChart>
+      <Label layoutX="762.0" layoutY="469.0" text="Buy/Sell history">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
     </children>
 </Pane>
