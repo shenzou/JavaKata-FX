@@ -69,4 +69,29 @@ public class Inventory {
   public  Item[] getItems() {
         return items;
     }
+  
+  public void addItem(Item item)
+  {
+	  Item[] temp = new Item[items.length+1];
+	  for(int i=0; i<items.length; i++)
+	  {
+		  temp[i] = items[i];
+	  }
+	  temp[items.length] = item;
+	  items = temp;
+  }
+  
+  public void removeItem(int index)
+  {
+	  Item[] temp = new Item[items.length-1];
+	  for(int i=0; i<index; i++)
+	  {
+		  temp[i] = items[i];
+	  }
+	  for(int i=index; i<items.length; i++)
+	  {
+		  temp[i] = items[i+1];
+	  }
+	  items = temp;
+  }
 }
